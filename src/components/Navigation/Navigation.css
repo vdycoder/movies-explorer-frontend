@@ -1,9 +1,9 @@
-.navtab {
+.navigation {
   width: 100%;
   margin: auto 0;
 }
 
-.navtab__wrapper {
+.navigation__wrapper {
   height: 32px;
   display: flex;
   justify-content: space-between;
@@ -14,17 +14,17 @@
 
 }
 
-.navtab__items {
+.navigation__items {
   display: inline-flex;
   justify-content: flex-start;
   gap: 16px;
   margin: auto 0;
 }
 
-.navtab__item {
+.navigation__item {
 }
 
-.navtab__link {
+.navigation__link {
   text-decoration: none;
   color: inherit;
   font-size: 13px;
@@ -32,15 +32,15 @@
   font-weight: 400;
 }
 
-.navtab__link:hover {
+.navigation__link:hover {
   opacity: .7;
 }
 
-.navtab__link_active {
+.navigation__link_active {
   font-weight: 500;
 }
 
-.navtab__btn {
+.navigation__btn {
   font-weight: 500;
   cursor: pointer;
   background-color: #202020;
@@ -58,15 +58,15 @@
 
 }
 
-.navtab__btn_active {
+.navigation__btn_active {
   border: 2px solid #F5F5F5;
 }
 
-.navtab__btn-text {
+.navigation__btn-text {
   margin: 0;
 }
 
-.navtab__btn-icon {
+.navigation__btn-icon {
   width: 26px;
   height: 26px;
   background-image: url('../../images/profile.svg');

@@ -1,0 +1,51 @@
+.about__roadmap {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  gap: 40px;
+}
+
+.about__milestone {
+  height: auto;
+  text-align: start;
+}
+
+.about__subtitle {
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 400;
+  margin-top: 70px;
+}
+
+.about__text {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.about__table {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-top: 110px;
+  margin-bottom: 105px;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 228px auto;
+}
+
+.about__cell {
+  font-size: 14px;
+  padding: 9px 14px;
+  color: #8B8B8B;
+}
+
+.about__cell_color_primary {
+  color: #000000;
+  background-color: #3DDC84;
+}
+
+.about__cell_color_secondary {
+  color: #fff;
+  background-color: #303030;
+}

@@ -1,0 +1,49 @@
+.techs {
+  background-color: #272727;
+}
+
+.techs__content {
+  padding: 0;
+  text-align: center;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.techs__item {
+  align-self: center;
+  font-size: 14px;
+  letter-spacing: calc(1em / -25);
+}
+
+.techs__title {
+  font-size: 50px;
+  line-height: 58px;
+  padding-top: 90px;
+  margin: 0;
+  width: 600px;
+}
+
+.techs__subtitle {
+  width: 460px;
+  line-height: 20px;
+  margin: 26px 0 100px;
+}
+
+.techs__table {
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  gap: 10px;
+  padding-bottom: 100px;
+}
+
+.techs__cell {
+  min-width: 90px;
+  background-color: #303030;
+  padding-top: 21px;
+  padding-bottom: 22px;
+  border-radius: 10px;
+  line-height: 17px;
+}

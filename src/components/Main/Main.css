@@ -1,0 +1,24 @@
+.section {
+  background-color: inherit;
+}
+
+.section__content {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.section__header {
+  display: flex;
+  border-bottom: 1px solid #DADADA;
+  padding-top: 110px;
+}
+
+.section__title {
+  font-size: 22px;
+  line-height: 27px;
+  font-weight: 400;
+  letter-spacing: calc(1em / -25);
+  flex-basis: 600px;
+}
+
+

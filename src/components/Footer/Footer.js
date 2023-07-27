@@ -20,7 +20,7 @@ function Footer(props) {
             </li>
             <li className='footer__item'>
               <Link
-                to={'https://github.com/vdycoder'}
+                to={'https://github.com/yandex-praktikum'}
                 target='blank'
                 className='footer__link'
               >Github</Link>
