@@ -1,0 +1,15 @@
+.card-list {
+  background-color: inherit;
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.card-list__wrapper {
+  margin: 70px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 38px 20px;
+}

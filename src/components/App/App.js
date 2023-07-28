@@ -6,11 +6,12 @@ import Footer from "../Footer/Footer";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 
+import { checkRoute } from "../../utils/utils";
+
 import {
   headerShowRoutes,
   footerShowRoutes,
-  checkRoute,
-} from "../../utils/utils";
+} from "../../utils/constants";
 
 function App() {
   const headerIsVisible = checkRoute(

@@ -1,10 +1,12 @@
-import React from 'react';
+import './MoviesMoreBtn.css';
 
 function MoviesMoreBtn(props) {
   return (
-    <div>
-      MoviesMoreBtn
-    </div>
+    <section className='more'>
+      <button className='more__btn'>
+        Ещё
+      </button>
+    </section>
   );
 }
 

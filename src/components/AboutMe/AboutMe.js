@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 import './AboutMe.css';
-import avatar from '../../images/student.svg';
+import avatar from '../../images/student.png';
 
 function AboutMe(props) {
   return (
