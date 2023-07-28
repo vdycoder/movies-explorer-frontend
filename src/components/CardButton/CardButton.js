@@ -30,7 +30,7 @@ function CardButton(props) {
       ></button>
     )}
     </>
-);
+  );
 }
 
 export default CardButton;
