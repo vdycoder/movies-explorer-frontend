@@ -1,10 +1,14 @@
-import React from 'react';
+import SearchForm from "../SearchForm/SearchForm";
+import MoviesCardList from "../MoviesCardList/MoviesCardList";
+import MoviesMoreBtn from "../MoviesMoreBtn/MoviesMoreBtn";
 
 function Movies(props) {
   return (
-    <div>
-      Movies
-    </div>
+    <main className='movies'>
+      <SearchForm />
+      <MoviesCardList />
+      <MoviesMoreBtn />
+    </main>
   );
 }
 

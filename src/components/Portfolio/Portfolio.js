@@ -8,21 +8,21 @@ function Portfolio(props) {
       <ul className='portfolio__list'>
         <li className='portfolio__item'>
           <Link
-              to={'https://github.com/vdycoder'}
+              to={'https://vdycoder.github.io/how-to-learn/'}
               target='blank'
               className='portfolio__link'
           >Статичный сайт</Link>
         </li>
         <li className='portfolio__item'>
           <Link
-              to={'https://github.com/vdycoder'}
+              to={'https://vdycoder.github.io/russian-travel/'}
               target='blank'
               className='portfolio__link'
           >Адаптивный сайт</Link>
         </li>
         <li className='portfolio__item'>
           <Link
-              to={'https://github.com/vdycoder'}
+              to={'https://mesto.vdycoder.nomoreparties.sbs/'}
               target='blank'
               className='portfolio__link'
           >Одностраничное приложение</Link>
