@@ -1,11 +1,7 @@
-import { useState } from 'react';
 import './MoviesCard.css';
+import CardButton from '../CardButton/CardButton';
 
-function MoviesCard({ movie }) {
-  const [ isSaved, setIsSaved ] = useState(movie.isSaved);
-  const handleLikeClick = () => {
-    setIsSaved(!isSaved)
-  }
+function MoviesCard({ movie, savedOnly }) {
   return (
     <article className='movie-card'>
       <img
@@ -15,14 +11,7 @@ function MoviesCard({ movie }) {
       />
       <div className="movie-card__caption-wrapper">
         <h2 className="movie-card__caption">{movie.nameRU}</h2>
-        <button
-          type="button"
-          className={`
-            movie-card__like-btn
-            ${isSaved ? 'movie-card__like-btn_active' : ''}
-          `}
-          onClick={handleLikeClick}
-        ></button>
+        <CardButton savedOnly={savedOnly} isSaved={movie.isSaved}/>
       </div>
       <p className='movie-card__duration'>1ч 42м</p>
     </article>

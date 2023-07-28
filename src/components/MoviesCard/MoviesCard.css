@@ -28,26 +28,6 @@
   font-weight: 500;
 }
 
-.movie-card__like-btn {
-  cursor: pointer;
-  width: 24px;
-  height: 24px;
-  border: none;
-  border-radius: 50%;
-  background-color: #313131;
-  background-image: url('../../images/icon__like.svg');
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.movie-card__like-btn:hover {
-  opacity: .8;
-}
-
-.movie-card__like-btn_active {
-  background-image: url('../../images/icon__like_active.svg');
-}
-
 .movie-card__duration {
   font-size: 11px;
   line-height: 13px;

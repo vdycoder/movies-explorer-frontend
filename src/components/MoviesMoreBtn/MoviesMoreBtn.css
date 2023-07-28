@@ -21,3 +21,11 @@
   line-height: 16px;
   font-weight: 500;
 }
+
+.more__btn:hover {
+  opacity: .8;
+}
+
+.more__btn_hidden {
+  padding: 0;
+}

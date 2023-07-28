@@ -1,16 +1,16 @@
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
-import { dummyMovies } from '../../utils/constants';
 
-function MoviesCardList(props) {
+function MoviesCardList({ movies, savedOnly }) {
   return (
     <section className='card-list'>
       <ul className='card-list__wrapper'>
-        {dummyMovies.map((movie) => (
+        {movies.map((movie) => (
           <li className='card-list__item'>
             <MoviesCard
               key={movie._id}
               movie={movie}
+              savedOnly={savedOnly}
             />
           </li>
         ))}

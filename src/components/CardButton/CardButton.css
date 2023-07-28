@@ -1,0 +1,31 @@
+.movie-card__btn {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 50%;
+  background-color: #313131;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.movie-card__btn-like {
+  background-image: url('../../images/icon__like.svg');
+}
+
+.movie-card__btn-like:hover {
+  opacity: .8;
+}
+
+.movie-card__btn-like_active {
+  background-image: url('../../images/icon__like_active.svg');
+}
+
+.movie-card__btn-delete {
+  opacity: 0;
+}
+
+.movie-card__btn-delete:hover {
+  background-image: url('../../images/icon__dislike.svg');
+  opacity: .8;
+}

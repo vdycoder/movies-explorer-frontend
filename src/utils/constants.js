@@ -99,6 +99,25 @@ export const dummyMovies = [
 
 ];
 
+export const dummyMoviesSaved = [
+  {
+    image: { url: img1 },
+    nameRU: 'Дженис: Маленькая девочка грустит',
+    isSaved: true
+  },
+  {
+    image: { url: img2 },
+    nameRU: 'Бег это свобода',
+    isSaved: true
+  },
+  {
+    image: { url: img3 },
+    nameRU: 'Рудбой',
+    isSaved: true
+  },
+];
+
+
 export const headerShowRoutes = [
   "/",
   "/movies",
