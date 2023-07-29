@@ -1,0 +1,16 @@
+.btn__primary {
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 500;
+  padding-top: 13px;
+  padding-bottom: 15px;
+  color: inherit;
+  background-color: #4285F4;
+  border: none;
+  border-radius: 3px;
+}
+
+.btn__primary_disabled {
+  color: #C2C2C2;
+  background-color: #F8F8F8;
+}

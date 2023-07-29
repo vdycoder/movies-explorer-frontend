@@ -19,3 +19,16 @@
   flex-direction: column;
   justify-content: flex-start;
 }
+
+.link,
+.btn {
+  cursor: pointer;
+}
+
+.link:hover {
+  opacity: .7;
+}
+
+.btn:hover {
+  opacity: .8;
+}
