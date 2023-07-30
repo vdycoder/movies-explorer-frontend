@@ -16,14 +16,14 @@ function CardButton(props) {
     {savedOnly ? (
       <button
         type="button"
-        className='movie-card__btn movie-card__btn-delete'
+        className='btn movie-card__btn movie-card__btn-delete'
         onClick={handleDeleteClick}
       ></button>
     ) : (
       <button
         type="button"
         className={`
-          movie-card__btn movie-card__btn-like
+          btn movie-card__btn movie-card__btn-like
           ${isSaved ? 'movie-card__btn-like_active' : ''}
         `}
         onClick={handleLikeClick}

@@ -15,7 +15,7 @@ function Header(props) {
     <header className={`header ${isMainPage ? "header_theme_main" : ""}`}>
       <div className="header__content">
         <Link to="/" className="header__logo-link">
-          <img className="header__logo" src={logo} alt="Логотип MoviesExplorer" />
+          <img className="btn header__logo" src={logo} alt="Логотип MoviesExplorer" />
         </Link>
         {isLoggedIn ? (
           <AuthNav />

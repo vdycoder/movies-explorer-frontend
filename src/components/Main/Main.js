@@ -8,7 +8,7 @@ import Portfolio from '../Portfolio/Portfolio';
 
 function Main() {
   return (
-    <main>
+    <main className='landing'>
       <Promo />
       <AboutProject caption={'О проекте'} />
       <Techs caption={'Технологии'}/>

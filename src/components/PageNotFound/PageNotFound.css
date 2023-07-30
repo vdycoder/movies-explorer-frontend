@@ -1,0 +1,35 @@
+.error-page__container {
+  width: 100%;
+  min-height: 700px;
+  max-width: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.error-page__info-wrapper {
+  margin-top: 246px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  text-align: center;
+}
+
+.error-page__title {
+  margin: 0;
+  font-size: 140px;
+  line-height: 169px;
+  font-weight: 400;
+}
+
+.error-page__subtitle {
+  margin: 0;
+  font-size: 16px;
+  line-height: 19px;
+  font-weight: 400;
+}
+
+.error-page__link {
+  margin-bottom: 60px;
+}

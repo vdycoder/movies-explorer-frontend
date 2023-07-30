@@ -1,3 +1,4 @@
+import React from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 
 import './App.css';
@@ -9,12 +10,13 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
-import { checkRoute } from "../../utils/utils";
+import PageNotFound from "../PageNotFound/PageNotFound";
 
 import {
   headerShowRoutes,
   footerShowRoutes,
 } from "../../utils/constants";
+import { checkRoute } from "../../utils/utils";
 
 function App() {
   const headerIsVisible = checkRoute(
@@ -35,7 +37,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/signup" element={<Register />} />
           <Route path="/signin" element={<Login />} />
-          {/*<Route path="*" element={<PageNotFound />} /> */}
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
         {footerIsVisible && <Footer />}
       </div>

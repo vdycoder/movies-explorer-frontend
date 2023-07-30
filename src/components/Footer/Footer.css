@@ -12,6 +12,7 @@
   align-items: flex-start;
   max-width: 1140px;
   margin: 0 auto;
+  padding: 0 30px;
 }
 
 .footer__title {
@@ -38,15 +39,11 @@
   justify-content: space-between;
 }
 
-.footer__copyright {}
-
 .footer__items-wrapper {
   list-style: none;
   display: inline-flex;
   gap: 20px;
 }
-
-.footer__item {}
 
 .footer__link {
   text-decoration: none;
