@@ -9,20 +9,20 @@ function Footer(props) {
           Учебный проект Яндекс.Практикум х BeatFilm.
         </h2>
         <nav className='footer__nav'>
-          <p className='footer__copyright'>&copy; 2023</p>
+          <span className='footer__copyright'>&copy; 2023</span>
           <ul className='footer__items-wrapper'>
             <li className='footer__item'>
               <Link
                 to={'https://practicum.yandex.ru/'}
                 target='blank'
-                className='footer__link'
+                className='link footer__link'
               >Яндекс.Практикум</Link>
             </li>
             <li className='footer__item'>
               <Link
                 to={'https://github.com/yandex-praktikum'}
                 target='blank'
-                className='footer__link'
+                className='link footer__link'
               >Github</Link>
             </li>
           </ul>

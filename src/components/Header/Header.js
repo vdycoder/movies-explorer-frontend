@@ -12,7 +12,7 @@ function Header(props) {
   const [isBurgerMenuActive, setIsBurgerMenuActive] = useState(false);
 
   return (
-    <header className={`header ${isMainPage ? "header_theme_main" : ""}`}>
+    <header className={`section header ${isMainPage ? "header_theme_main" : ""}`}>
       <div className="header__content">
         <Link to="/" className="header__logo-link">
           <img className="btn header__logo" src={logo} alt="Логотип MoviesExplorer" />

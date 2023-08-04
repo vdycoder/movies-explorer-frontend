@@ -2,7 +2,7 @@ import './AboutProject.css';
 
 function AboutProject(props) {
   return (
-    <section className='section'>
+    <section className='section section_landing about'>
       <div className='section__content'>
         <div className='section__header'>
           <h2 className='section__title'>{props.caption}</h2>

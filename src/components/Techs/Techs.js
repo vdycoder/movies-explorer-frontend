@@ -2,9 +2,9 @@ import './Techs.css';
 
 function Techs(props) {
   return (
-    <section className='techs'>
+    <section className='section section_landing techs'>
       <div className='section__content'>
-        <div className='section__header'>
+        <div className='section__header section__header_dark'>
           <h2 className='section__title'>{props.caption}</h2>
         </div>
         <ul className='techs__content'>

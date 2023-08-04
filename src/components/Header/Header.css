@@ -1,6 +1,6 @@
 .header {
   height: 74px;
-  background-color: inherit;
+  padding: 18px 0;
 }
 
 .header_theme_main {
@@ -14,13 +14,7 @@
   gap: 44px;
   max-width: 1140px;
   margin: 0 auto;
-  padding: 18px 30px;
-}
-
-@media screen and (max-width: 1140px){
-  .header__content {
-    /* padding: 18px 30px; */
-  }
+  padding: 18px 0;
 }
 
 .header__logo {
@@ -36,8 +30,8 @@
 
 }
 
-
 .header__nav-links {
   display: inline-flex;
   gap: 24px;
 }
+
