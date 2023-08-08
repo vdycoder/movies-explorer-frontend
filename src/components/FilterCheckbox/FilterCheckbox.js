@@ -9,7 +9,7 @@ function FilterCheckbox(props) {
         name='short_movie_filter'
         className='filter__checkbox'
       ></input>
-      <span className='filter__checkbox_custom'></span>
+      <span className='btn filter__checkbox_custom'></span>
       <span className='link filter__caption'>Короткометражки</span>
     </label>
   );

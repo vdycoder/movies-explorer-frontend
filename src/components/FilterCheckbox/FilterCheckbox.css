@@ -1,12 +1,16 @@
 .filter {
   margin: auto 0;
-  padding: 0 30px 0 29px;
+  padding: 0 0 0 29px;
   height: 40px;
   display: flex;
+  position: relative;
   border-left: 1px solid #424242;
 }
 
 .filter__checkbox {
+  position: absolute;
+  top: 0;
+  left: 0;
   margin: 0;
   display: block;
   width: 0;
@@ -25,10 +29,6 @@
   border: none;
   border-radius: 20px;
   background: #343434;
-}
-
-.filter__checkbox_custom:hover {
-  opacity: .8;
 }
 
 .filter__checkbox_custom:before {
@@ -53,4 +53,15 @@
   font-size: 13px;
   line-height: 18px;
   font-weight: 400;
+}
+
+@media screen and (max-width: 767px) {
+  .filter {
+    position: relative;
+    padding: 0;
+    margin: auto;
+    top: 51px;
+    border-left: none;
+  }
+
 }

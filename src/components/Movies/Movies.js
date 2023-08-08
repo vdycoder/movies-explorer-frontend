@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
 import './Movies.css';
-import SearchForm from "../SearchForm/SearchForm";
-import MoviesCardList from "../MoviesCardList/MoviesCardList";
-import MoviesMoreBtn from "../MoviesMoreBtn/MoviesMoreBtn";
+import SearchForm from '../SearchForm/SearchForm';
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import MoviesMoreBtn from '../MoviesMoreBtn/MoviesMoreBtn';
 import { dummyMovies } from '../../utils/constants';
 
 function Movies(props) {

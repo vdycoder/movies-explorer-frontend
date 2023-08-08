@@ -1,0 +1,55 @@
+.burger__btn {
+  padding: 0;
+  margin: 0;
+  display: none;
+  background-color: inherit;
+  border: none;
+  width: 44px;
+  height: 44px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.burger__line,
+.burger__line::before,
+.burger__line::after {
+  position: absolute;
+  background-color: #fff;
+  height: 3px;
+  width: 28px;
+}
+
+.burger__line::before {
+  content: '';
+  left: 0;
+  top: -10px;
+}
+
+.burger__line::after {
+  content: '';
+  left: 0;
+  top: 10px;
+}
+
+
+@media screen and (max-width: 768px) {
+  .burger__btn {
+    display: flex;
+    /* z-index: 10; delete!!! */
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .burger__btn {
+    width: 40px;
+    height: 43px;
+  }
+
+  .burger__line,
+  .burger__line::before,
+  .burger__line::after {
+    width: 22px;
+  }
+
+}

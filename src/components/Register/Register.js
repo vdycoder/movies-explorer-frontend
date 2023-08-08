@@ -52,10 +52,10 @@ function Register(props) {
             className='auth__label'
           >Имя</label>
           <input
-            id="name"
-            name="name"
-            className="auth__input"
-            type="text"
+            id='name'
+            name='name'
+            className='auth__input'
+            type='text'
             placeholder='Виталий'
             value={name}
             onChange={handleNameChange}
@@ -71,10 +71,10 @@ function Register(props) {
             className='auth__label'
           >E-mail</label>
           <input
-            id="email"
-            name="email"
-            className="auth__input"
-            type="email"
+            id='email'
+            name='email'
+            className='auth__input'
+            type='email'
             placeholder='pochta@yandex.ru'
             value={email}
             onChange={handleEmailChange}
@@ -90,10 +90,10 @@ function Register(props) {
             className='auth__label'
           >Пароль</label>
           <input
-            id="password"
-            name="password"
-            className="auth__input auth__input_with-error"
-            type="password"
+            id='password'
+            name='password'
+            className='auth__input auth__input_with-error'
+            type='password'
             value={password || '••••••••••••••'}
             onChange={handlePasswordChange}
             required
@@ -113,8 +113,8 @@ function Register(props) {
         <span className='auth__actions_link-container'>
           Уже зарегистрированы?
           <Link
-            to="/signin"
-            className="link auth__link"
+            to='/signin'
+            className='link auth__link'
           >Войти</Link>
         </span>
       </nav>

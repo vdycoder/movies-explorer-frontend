@@ -5,13 +5,12 @@ import Preloader from '../Preloader/Preloader';
 function MoviesCardList({ movies, savedOnly }) {
   const isEmpty = Object.keys(movies).length === 0;
   return (
-    <section className='card-list'>
+    <section className='card-list' aria-label='Список карточек фильмов'>
       <ul className='card-list__wrapper'>
         {!isEmpty ? (
-          movies.map((movie) => (
-            <li className='card-list__item'>
+          movies.map((movie, i) => (
+            <li key={i} className='card-list__item'>
               <MoviesCard
-                key={movie._id}
                 movie={movie}
                 savedOnly={savedOnly}
               />

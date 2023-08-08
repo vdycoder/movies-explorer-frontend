@@ -7,8 +7,8 @@
 }
 
 .more__btn {
-  margin: 60px 0 80px;
-  width: 200px;
+  margin: 50px 0 80px;
+  width: 320px;
   background-color: #2F2F2F;
   border: none;
   border-radius: 6px;
@@ -22,10 +22,19 @@
   font-weight: 500;
 }
 
-.more__btn:hover {
-  opacity: .8;
-}
-
 .more__btn_hidden {
   padding: 0;
+}
+
+@media screen and (max-width: 767px) {
+  .more__btn {
+    width: 240px;
+    padding: 11px 20px 9px 20px;
+  }
+  .more__btn_hidden {
+    padding: 0;
+    margin: 60px 0 80px;
+
+  }
+
 }

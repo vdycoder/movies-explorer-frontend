@@ -9,19 +9,19 @@ function ProfileActions(props) {
       {props.isEditMode ? (
         <div className='profile__actions'>
           <button
-            className='profile__actions_save'
+            className='btn profile__actions_save'
             onClick={props.changeEditMode}
           >Сохранить</button>
         </div>
       ) : (
         <div className='profile__actions'>
           <button
-            className='profile__actions_edit'
+            className='btn profile__actions_edit'
             onClick={props.changeEditMode}
           >Редактировать</button>
           <Link
             to='/'
-            className='profile__actions_signout'
+            className='link profile__actions_signout'
           >Выйти из аккаунта</Link>
         </div>
       )}

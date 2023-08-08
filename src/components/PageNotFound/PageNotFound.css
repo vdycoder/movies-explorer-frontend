@@ -1,15 +1,15 @@
 .error-page__container {
   width: 100%;
-  min-height: 700px;
+  min-height: 394px;
   max-width: 400px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding: 246px 0 60px;
 }
 
 .error-page__info-wrapper {
-  margin-top: 246px;
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -30,6 +30,31 @@
   font-weight: 400;
 }
 
-.error-page__link {
-  margin-bottom: 60px;
+
+@media screen and (max-width: 1139px) {
+  .error-page__container {
+    padding-top: 408px;
+  }
+
+}
+
+@media screen and (max-width: 767px) {
+  .error-page__container {
+    padding: 0 10px;
+    padding-top: 329px;
+    padding-bottom: 30px;
+    max-width: 300px;
+    min-height: 421px;
+
+  }
+  .error-page__title {
+    font-size: 80px;
+    line-height: 97px;
+  }
+
+  .error-page__subtitle {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
 }

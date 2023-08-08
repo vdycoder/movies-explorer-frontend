@@ -1,3 +1,5 @@
+import React from 'react';
+
 import './SearchForm.css';
 import searchIcon from '../../images/search-icon.svg';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
@@ -29,7 +31,7 @@ function SearchForm(props) {
               id='submit_search'
               type='submit'
               name='submit_search'
-              className='search-form__submit-btn'
+              className='btn search-form__submit-btn'
             >Найти</button>
           </div>
           <FilterCheckbox />

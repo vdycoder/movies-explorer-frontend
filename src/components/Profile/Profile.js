@@ -23,7 +23,7 @@ function Profile(props) {
 
   return (
     <main className='profile'>
-      <section className='profile__content' aria-label='Профиль пользователя'>
+      <section className='section profile__content' aria-label='Профиль пользователя'>
         <form className='profile__form'>
           <h2 className='profile__header'>Привет, Виталий!</h2>
           <fieldset className='profile__input-wrapper'>
