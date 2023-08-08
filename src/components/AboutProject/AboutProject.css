@@ -1,0 +1,129 @@
+.about__roadmap {
+  padding: 0;
+  margin: 70px 0 0;
+  list-style: none;
+  display: flex;
+  gap: 40px;
+}
+
+.about__milestone {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  text-align: start;
+}
+
+.about__subtitle {
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 400;
+  letter-spacing: calc(1em / -25);
+  margin: 0;
+}
+
+.about__text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+.about__table {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-top: 110px;
+  margin-bottom: 96px;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 228px auto;
+}
+
+.about__cell {
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 400;
+  padding: 14px;
+  color: #8B8B8B;
+}
+
+.about__cell_color_primary {
+  line-height: 18px;
+  padding: 9px 14px;
+  color: #000000;
+  background-color: #3DDC84;
+}
+
+.about__cell_color_secondary {
+  line-height: 18px;
+  padding: 9px 14px;
+  color: #fff;
+  background-color: #303030;
+}
+
+@media screen and (max-width: 1139px){
+  .about__roadmap {
+    gap: 30px;
+  }
+  .about__milestone {
+    gap: 22px;
+  }
+  .about__subtitle {
+    font-size: 20px;
+    line-height: 24px;
+  }
+  .about__text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+  .about__table {
+    margin-top: 93px;
+    margin-bottom: 76px;
+    grid-template-columns: 140px auto;
+  }
+  .about__cell {
+    font-size: 14px;
+    line-height: 17px;
+    padding: 14px;
+  }
+
+}
+
+@media screen and (max-width: 767px){
+  .about__roadmap {
+    margin: 60px 0 0;
+    flex-direction: column;
+    gap: 56px;
+  }
+  .about__milestone {
+    width: 100%;
+    gap: 16px;
+  }
+  .about__subtitle {
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .about__text {
+    font-size: 11px;
+    line-height: 16px;
+  }
+  .about__table {
+    margin: 60px 0;
+    grid-template-columns: 100px auto;
+  }
+  .about__cell {
+    font-size: 11px;
+    line-height: 13px;
+    padding: 10px;
+  }
+  .about__cell_color_primary {
+    line-height: 13px;
+    padding: 11px 10px;
+  }
+  .about__cell_color_secondary {
+    line-height: 13px;
+    padding: 11px 10px;
+  }
+
+}

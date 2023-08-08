@@ -1,0 +1,34 @@
+.card-list {
+  background-color: inherit;
+  max-width: 1140px;
+  margin: 0 auto;
+  margin-top: 70px;
+  padding: 0 30px;
+}
+
+.card-list__wrapper {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 38px 20px;
+}
+
+@media screen and (max-width: 1139px) {
+  .card-list__wrapper {
+    gap: 20px 30px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .card-list {
+    margin-top: 40px;
+    padding: 0 10px;
+  }
+
+  .card-list__wrapper {
+    justify-content: space-around;
+    gap: 34px;
+  }
+}
