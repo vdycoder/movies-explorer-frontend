@@ -54,6 +54,7 @@
   width: 100%;
   max-width: 520px;
   background-color: #202020;
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
