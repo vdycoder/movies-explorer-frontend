@@ -1,31 +1,66 @@
-import { useState } from "react";
+import { useEffect, useState } from 'react';
 
 import './Profile.css';
-import ProfileActions from "../ProfileActions/ProfileActions";
+import useValidation from '../../hooks/useValidation';
 
-function Profile(props) {
+function Profile({
+  currentUser,
+  onUserUpdate,
+  onLogout,
+  isLoading,
+  serverError,
+  setServerError,
+}) {
   const [isEditMode, setIsEditMode] = useState(false);
-  const [name, setName] = useState('Виталий');
-  const [email, setEmail] = useState('pochta@yandex.ru');
+  const [isUserUpdated, setIsUserUpdated] = useState(false);
+  const {
+    values,
+    errors,
+    isValid,
+    handleChange,
+    resetValidation
+  } = useValidation();
 
-  function handleNameChange(e) {
-    setName(e.target.value);
+  function handleSubmit(e) {
+    e.preventDefault();
+    onUserUpdate(values);
   }
 
-  function handleEmailChange(e) {
-    setEmail(e.target.value);
+  function handleLogout(e) {
+    e.preventDefault();
+    onLogout();
   }
 
   function changeEditMode(e) {
-    e.preventDefault()
-    setIsEditMode(!isEditMode)
+    e.preventDefault();
+    setIsEditMode(!isEditMode);
+    values.name = currentUser.name;
+    values.email = currentUser.email;
   }
+
+  useEffect(() => {
+      currentUser.name !== values.name || currentUser.email !== values.email
+        ? setIsUserUpdated(true)
+        : setIsUserUpdated(false);
+    }, [currentUser, values]
+  );
+
+  useEffect(() => {
+      resetValidation();
+    }, [resetValidation]
+  );
+
+  useEffect(() => {
+      setServerError('');
+    }, [values, setServerError]
+  );
+
 
   return (
     <main className='profile'>
       <section className='section profile__content' aria-label='Профиль пользователя'>
         <form className='profile__form'>
-          <h2 className='profile__header'>Привет, Виталий!</h2>
+          <h2 className='profile__header'>{`Привет, ${currentUser.name}`}</h2>
           <fieldset className='profile__input-wrapper'>
             <div className='profile__input-container'>
               <label
@@ -34,15 +69,15 @@ function Profile(props) {
               >Имя</label>
               <input
                 id='name'
-                type='text'
                 name='name'
-                placeholder='Виталий'
+                type='text'
                 className='profile__input'
-                value={name}
-                onChange={handleNameChange}
+                value={values.name || currentUser.name}
+                onChange={handleChange}
                 disabled={isEditMode ? '': 'disabled'}
                 required
               ></input>
+              <span className='form__input-error profile__input-error'>{errors.name || ''}</span>
             </div>
             <div className='profile__input-container'>
               <label
@@ -51,18 +86,43 @@ function Profile(props) {
               >E-mail</label>
               <input
                 id='email'
-                type='email'
                 name='email'
-                placeholder='pochta@yandex.ru'
+                type='email'
                 className='profile__input'
-                value={email}
-                onChange={handleEmailChange}
+                value={values.email || currentUser.email}
+                onChange={handleChange}
                 disabled={isEditMode ? '': 'disabled'}
                 required
               ></input>
+              <span className='form__input-error profile__input-error'>{errors.email || ''}</span>
             </div>
           </fieldset>
-          <ProfileActions isEditMode={isEditMode} changeEditMode={changeEditMode} />
+          {isEditMode ? (
+            <div className='profile__actions'>
+              <span
+                className={`auth__server-error ${
+                  isValid || isLoading ? '' : 'auth__server-error__active'
+                }`}
+              >{serverError}</span>
+              <button
+                type='button'
+                className={`btn profile__actions_save ${!isValid || !isUserUpdated ? 'btn__primary_disabled': ''}`}
+                disabled={!isValid || !isUserUpdated ? 'disabled' : ''}
+                onClick={handleSubmit}
+              >{isLoading ? 'Сохранение...' : 'Сохранить'}</button>
+            </div>
+          ) : (
+            <div className='profile__actions'>
+              <button
+                className='btn profile__actions_edit'
+                onClick={changeEditMode}
+              >Редактировать</button>
+              <button
+                className='btn profile__actions_signout'
+                onClick={handleLogout}
+              >Выйти из аккаунта</button>
+            </div>
+          )}
         </form>
       </section>
     </main>

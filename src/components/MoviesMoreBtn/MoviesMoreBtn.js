@@ -7,9 +7,7 @@ function MoviesMoreBtn(props) {
         btn
         more__btn
         ${props.hasMoreMovies ? '': 'more__btn_hidden'}
-      `}>
-        {`${props.hasMoreMovies ? 'Ещё': ''}`}
-      </button>
+      `}>Ещё</button>
     </section>
   );
 }

@@ -101,6 +101,6 @@
     display: none;
   }
   .search-form__input {
-    max-width: calc(100% - 80px);
+    max-width: calc(100% - 82px);
   }
 }

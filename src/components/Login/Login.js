@@ -1,31 +1,45 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useCallback, useEffect } from 'react';
+import { Link, Navigate } from 'react-router-dom';
 
-import './Login.css';
 import logo from '../../images/logo.svg';
 import ActionBtn from '../ActionBtn/ActionBtn';
 import AuthForm from '../AuthForm/AuthForm';
+import useValidation from '../../hooks/useValidation';
 
-function Login(props) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+function Login({
+  onLogin,
+  loggedIn,
+  isLoading,
+  serverError,
+  setServerError
+}) {
+  const {
+    values,
+    errors,
+    isValid,
+    handleChange,
+    resetValidation
+  } = useValidation();
 
-  function handleEmailChange(e) {
-    setEmail(e.target.value);
-  }
+  const handleSubmit = useCallback((e) => {
+      e.preventDefault();
+      onLogin(values);
+    }, [values, onLogin]
+  );
 
-  function handlePasswordChange(e) {
-    setPassword(e.target.value);
-  }
+  useEffect(() => {
+      resetValidation();
+    }, [resetValidation]
+  );
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    //onRegister(email, password);
-    navigate('/movies');
-  }
+  useEffect(() => {
+      setServerError('');
+    }, [values, setServerError]
+  );
 
-  return (
+  return loggedIn ? (
+    <Navigate to='/movies' replace />
+  ) : (
     <main className='auth'>
       <div className='auth__header'>
         <Link
@@ -39,7 +53,6 @@ function Login(props) {
       <AuthForm
         id={'login-form'}
         name={'login-form'}
-        onSubmit={handleSubmit}
       >
         <div className='auth__input-container'>
           <label
@@ -47,18 +60,18 @@ function Login(props) {
             className='auth__label'
           >E-mail</label>
           <input
-            id="email"
-            name="email"
-            className="auth__input"
-            type="email"
+            id='email'
+            name='email'
+            type='email'
+            className={`auth__input ${
+              errors.email in errors ? 'auth__input_with-error' : ''
+            }`}
             placeholder='pochta@yandex.ru'
-            value={email}
-            onChange={handleEmailChange}
+            value={values.email || ''}
+            onChange={handleChange}
             required
           ></input>
-          <span
-            className='form__input-error form__input-error_field_email'
-          ></span>
+          <span className='form__input-error'>{errors.email || ''}</span>
         </div>
         <div className='auth__input-container'>
           <label
@@ -66,31 +79,37 @@ function Login(props) {
             className='auth__label'
           >Пароль</label>
           <input
-            id="password"
-            name="password"
-            className="auth__input auth__input_with-error"
-            type="password"
-            value={password || ''}
-            onChange={handlePasswordChange}
+            id='password'
+            name='password'
+            type='password'
+            className={`auth__input ${
+              errors.password in errors ? 'auth__input_with-error' : ''
+            }`}
+            value={values.password || ''}
+            onChange={handleChange}
             required
           ></input>
-          <span
-            className='form__input-error form__input-error_field_password'
-          ></span>
+          <span className='form__input-error'>{errors.password || ''}</span>
         </div>
       </AuthForm>
       <nav className='auth__actions'>
+        <span
+          className={`auth__server-error ${
+            isValid || isLoading ? '' : 'auth__server-error__active'
+          }`}
+        >{serverError}</span>
+
         <ActionBtn
-          caption={'Войти'}
-          isDisabled={false}
+          caption={isLoading ? 'Вход...' : 'Войти'}
+          isDisabled={!isValid || isLoading}
           onClick={handleSubmit}
           form='login-form'
         />
         <span className='auth__actions_link-container'>
           Ещё не зарегистрированы?
           <Link
-            to="/signup"
-            className="link auth__link"
+            to='/signup'
+            className='link auth__link'
           >Регистрация</Link>
         </span>
       </nav>

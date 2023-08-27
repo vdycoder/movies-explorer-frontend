@@ -40,10 +40,13 @@
   padding-top: 17px;
   padding-bottom: 16px;
   border-bottom: 1px solid #424242;
-  display: inline-flex;
-  justify-content: space-between;
+  /* display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; */
   align-content: baseline;
-  gap: 147px;
+  /* gap: 147px; */
+  display: grid;
+  grid-template-columns: 50px auto;
 }
 
 .profile__input-container:last-child {
@@ -51,7 +54,7 @@
 }
 
 .profile__label {
-  width: 100%;
+  width: 50px;
   text-align: left;
   font-size: 11px;
   line-height: 14px;
@@ -59,7 +62,7 @@
 }
 
 .profile__input {
-  width: 100%;
+  min-width: 80%;
   text-align: right;
   font-size: 11px;
   line-height: 14px;
@@ -68,11 +71,20 @@
   border: none;
   outline: none;
   color: #fff;
+  border-bottom: 1px solid transparent;
+}
 
+.profile__input:focus {
+  border-bottom: 1px solid #4285F4;
 }
 
 .profile__input:disabled {
   background: inherit;
+}
+
+.profile__input-error {
+  text-align: left;
+  grid-column: span 2;
 }
 
 .profile__actions {
@@ -93,13 +105,29 @@
 }
 
 .profile__actions_signout {
+  padding: 0;
   font-size: 13px;
   line-height: 16px;
   font-weight: 500;
   cursor: pointer;
-  text-decoration: none;
+  background-color: inherit;
+  border: none;
   color: #EE3465;
 }
+
+.profile__actions_save {
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 500;
+  padding-top: 13px;
+  padding-bottom: 15px;
+  color: inherit;
+  background-color: #4285F4;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
 
 @media screen and (max-width: 1139px) {
   .profile__content {

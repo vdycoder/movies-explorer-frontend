@@ -11,13 +11,14 @@
   padding: 0;
   list-style: none;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-wrap: wrap;
   gap: 38px 20px;
 }
 
 @media screen and (max-width: 1139px) {
   .card-list__wrapper {
+    justify-content: space-between;
     gap: 20px 30px;
   }
 }

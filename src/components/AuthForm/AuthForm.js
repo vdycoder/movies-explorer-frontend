@@ -1,7 +1,5 @@
 import React from 'react';
 
-import './AuthForm.css';
-
 function AuthForm(props) {
   return (
     <form
