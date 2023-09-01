@@ -1,13 +1,12 @@
 import './MoviesMoreBtn.css';
 
-function MoviesMoreBtn(props) {
+function MoviesMoreBtn({onClick}) {
   return (
     <section className='more' aria-label='Показать больше фильмов'>
-      <button className={`
-        btn
-        more__btn
-        ${props.hasMoreMovies ? '': 'more__btn_hidden'}
-      `}>Ещё</button>
+      <button
+        className='btn more__btn'
+        onClick={onClick}
+      >Ещё</button>
     </section>
   );
 }

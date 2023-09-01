@@ -37,7 +37,7 @@
 .navigation__btn {
   font-weight: 500;
   cursor: pointer;
-  background-color: #202020;
+  background-color: transparent;
   border: 2px solid #202020;
   border-radius: 40px;
   outline: none;
@@ -48,6 +48,11 @@
   margin: auto 0;
   height: 32px;
 }
+
+.navigation__btn_theme_main {
+  border: 2px solid #F5F5F5;
+}
+
 
 .navigation__btn_active {
   border: 2px solid #F5F5F5;

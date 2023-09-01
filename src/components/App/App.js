@@ -13,11 +13,7 @@ import Login from '../Login/Login';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
-import {
-  headerShowRoutes,
-  footerShowRoutes,
-  MOVIES_API_URL
-} from '../../utils/constants';
+import { headerShowRoutes, footerShowRoutes } from '../../utils/constants';
 import { checkRoute } from '../../utils/utils';
 import mainApi from '../../utils/MainApi';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
@@ -68,7 +64,7 @@ function App() {
   }, [navigate, isLoggedIn]);
 
 
-  async function handleUserRegister({ name, email, password }) {
+  function handleUserRegister({ name, email, password }) {
     setIsLoading(true);
     mainApi.signupUser({ name, email, password })
       .then(res => {
@@ -85,7 +81,7 @@ function App() {
       })
   };
 
-  async function handleUserLogin({ email, password }) {
+  function handleUserLogin({ email, password }) {
     setIsLoading(true);
     mainApi.signinUser({ email, password })
       .then(res => {
@@ -105,7 +101,7 @@ function App() {
 
   };
 
-  async function handleUserLogout() {
+  function handleUserLogout() {
     localStorage.clear();
     setCurrentUser({});
     setSavedMovies([]);
@@ -113,7 +109,7 @@ function App() {
     navigate('/', {replace: true});
   }
 
-  async function handleUserUpdate({ name, email }) {
+  function handleUserUpdate({ name, email }) {
     const token = localStorage.getItem('jwt');
     setIsLoading(true);
     mainApi.updateUser({ name, email, token })
@@ -132,12 +128,36 @@ function App() {
       })
   };
 
-  async function handleMovieSave() {
-
+  function handleMovieSave(movie) {
+    const token = localStorage.getItem('jwt');
+    mainApi.saveMovie({ movie, token })
+      .then(res => {
+        if (res) {
+          setSavedMovies([res, ...savedMovies]);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        setServerError(err);
+      })
   };
 
-  async function handleMovieDelete() {
-
+  function handleMovieDelete(movie) {
+    const token = localStorage.getItem('jwt');
+    const movieToDelete = savedMovies.find((savedMovie) => {
+      return savedMovie.movieId === (movie.movieId || movie.id);
+    });
+    mainApi.deleteMovie(movieToDelete._id, token)
+      .then(() => {
+          setSavedMovies((current) => {
+            return current.filter((movie) => movie._id !== movieToDelete._id);
+          });
+        }
+      )
+      .catch(err => {
+        console.log(err);
+        setServerError(err);
+      })
   };
 
   return (
@@ -159,7 +179,17 @@ function App() {
                 }
               ></ProtectedRoute>
             }/>
-            <Route path='/saved-movies' element={<SavedMovies />} />
+            <Route path='/saved-movies' element={
+              <ProtectedRoute
+                isLoggedIn={isLoggedIn}
+                element={
+                  <SavedMovies
+                    savedMovies={savedMovies}
+                    onMovieDelete={handleMovieDelete}
+                  ></SavedMovies>
+                }
+              ></ProtectedRoute>
+            }/>
             <Route path='/profile' element={
               <ProtectedRoute
                 isLoggedIn={isLoggedIn}

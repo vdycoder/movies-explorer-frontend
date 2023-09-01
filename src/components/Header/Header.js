@@ -6,9 +6,8 @@ import logo from '../../images/logo.svg';
 import AuthNav from '../AuthNav/AuthNav';
 import Navigation from '../Navigation/Navigation';
 
-function Header(props) {
+function Header({ loggedIn }) {
   const isMainPage = useLocation().pathname === '/';
-  const isLoggedIn = isMainPage; // temporary value!!!
 
   return (
     <header className={`section header ${isMainPage ? 'header_theme_main' : ''}`}>
@@ -16,7 +15,7 @@ function Header(props) {
         <Link to='/' className='header__logo-link'>
           <img className='btn header__logo' src={logo} alt='Логотип MoviesExplorer' />
         </Link>
-        {isLoggedIn ? (
+        {!loggedIn ? (
           <AuthNav />
         ) : (
           <Navigation />

@@ -16,6 +16,10 @@
   gap: 38px 20px;
 }
 
+.card-list__info {
+  text-align: center;
+}
+
 @media screen and (max-width: 1139px) {
   .card-list__wrapper {
     justify-content: space-between;

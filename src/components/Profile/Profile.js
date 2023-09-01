@@ -58,7 +58,10 @@ function Profile({
 
   return (
     <main className='profile'>
-      <section className='section profile__content' aria-label='Профиль пользователя'>
+      <section
+        className='section profile__content'
+        aria-label='Профиль пользователя'
+      >
         <form className='profile__form'>
           <h2 className='profile__header'>{`Привет, ${currentUser.name}`}</h2>
           <fieldset className='profile__input-wrapper'>
@@ -106,7 +109,11 @@ function Profile({
               >{serverError}</span>
               <button
                 type='button'
-                className={`btn profile__actions_save ${!isValid || !isUserUpdated ? 'btn__primary_disabled': ''}`}
+                className={`
+                  btn
+                  profile__actions_save
+                  ${!isValid || !isUserUpdated ? 'btn__primary_disabled': ''}
+                `}
                 disabled={!isValid || !isUserUpdated ? 'disabled' : ''}
                 onClick={handleSubmit}
               >{isLoading ? 'Сохранение...' : 'Сохранить'}</button>

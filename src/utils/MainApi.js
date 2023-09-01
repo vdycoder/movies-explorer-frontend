@@ -1,4 +1,4 @@
-import { MAIN_API_URL } from './constants';
+import { MAIN_API_URL, MOVIES_API_URL } from './constants';
 
 class MainApi {
   constructor(options) {
@@ -6,6 +6,9 @@ class MainApi {
   }
 
   _checkResponse(res) {
+    if (res.status === 204) {
+      return res;
+    }
     if (res.ok) {
       return res.json();
     }
@@ -75,24 +78,24 @@ class MainApi {
   }
 
   // Сохранение фильма пользователем
-  saveMovie({
-    country,
-    director,
-    duration,
-    year,
-    description,
-    image,
-    trailerLink,
-    thumbnail,
-    movieId,
-    nameRU,
-    nameEN,
-    token
-  }) {
+  saveMovie({ movie, token }) {
+    const {
+      country,
+      director,
+      duration,
+      year,
+      description,
+      trailerLink,
+      nameRU,
+      nameEN
+    } = movie;
+    const image = MOVIES_API_URL + movie.image.url;
+    const thumbnail = MOVIES_API_URL + movie.image.formats.thumbnail.url;
+    const movieId = movie.id
     this._options.headers.Authorization = `Bearer ${token}`
     return this._request(this._options.baseUrl + '/movies', {
       method: 'POST',
-      headers: this._headers,
+      headers: this._options.headers,
       body: JSON.stringify({
         country,
         director,
@@ -110,11 +113,11 @@ class MainApi {
   }
 
   // Удаление фильма пользователя из сохраненных
-  deleteMovie({ movieId, token }) {
+  deleteMovie( movieId, token ) {
     this._options.headers.Authorization = `Bearer ${token}`
     return this._request(this._options.baseUrl + '/movies/' + movieId, {
       method: 'DELETE',
-      headers: this._headers,
+      headers: this._options.headers,
     });
   }
 }

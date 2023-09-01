@@ -40,7 +40,7 @@ function NavigationTab(props) {
               navigation__link
               btn
               navigation__btn
-              ${currentPath === '/profile' ? 'navigation__btn_active' : ''}
+              ${(currentPath === '/profile' || currentPath ===  '/') ? 'navigation__btn_active' : ''}
             `}
           >
             <p className='navigation__btn-text'>Аккаунт</p>
