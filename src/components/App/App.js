@@ -23,28 +23,11 @@ function App() {
   const headerIsVisible = checkRoute(headerShowRoutes, useLocation().pathname);
   const footerIsVisible = checkRoute(footerShowRoutes, useLocation().pathname);
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState({});
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [currentUser, setCurrentUser] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [serverError, setServerError] = useState('');
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      const token = localStorage.getItem('jwt');
-      Promise.all([
-        mainApi.getUserInfo({ token }),
-        mainApi.getSavedMovies({ token })
-      ])
-      .then(([userData, moviesData]) => {
-        setCurrentUser(userData);
-        setSavedMovies(moviesData);
-        })
-      .catch(err => {
-        console.log(err);
-      });
-    }
-  }, [isLoggedIn]);
 
   useEffect(() => {
     const token = localStorage.getItem('jwt');
@@ -52,17 +35,34 @@ function App() {
       mainApi.getUserInfo({ token })
         .then(res => {
           if (res) {
-            setIsLoggedIn(true)
+            console.log(res);
+            setIsLoggedIn(true);
+            setCurrentUser(res);
           }
         })
         .catch(err => {
           console.log(err);
+          setIsLoggedIn(false);
+          localStorage.removeItem('jwt');
         })
     } else {
-      setIsLoggedIn(false)
+      setIsLoggedIn(false);
     }
-  }, [navigate, isLoggedIn]);
+  }, [isLoggedIn]);
 
+  useEffect(() => {
+    if (isLoggedIn) {
+      const token = localStorage.getItem('jwt');
+      mainApi.getSavedMovies({ token })
+      .then((moviesData) => {
+        setSavedMovies(moviesData);
+        })
+      .catch(err => {
+        console.log(err);
+        setIsLoggedIn(false);
+      });
+    }
+  }, [isLoggedIn]);
 
   function handleUserRegister({ name, email, password }) {
     setIsLoading(true);
@@ -195,7 +195,6 @@ function App() {
                 isLoggedIn={isLoggedIn}
                 element={
                   <Profile
-                    currentUser={currentUser}
                     onUserUpdate={handleUserUpdate}
                     onLogout={handleUserLogout}
                     isLoading={isLoading}

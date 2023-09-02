@@ -2,7 +2,6 @@ import './FilterCheckbox.css';
 
 function FilterCheckbox({
   isShortFilms,
-  // setIsShortFilms,
   handleToggleCheckbox
 }) {
   return (

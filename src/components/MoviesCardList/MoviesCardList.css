@@ -22,7 +22,7 @@
 
 @media screen and (max-width: 1139px) {
   .card-list__wrapper {
-    justify-content: space-between;
+    /* justify-content: space-between; */
     gap: 20px 30px;
   }
 }
@@ -33,7 +33,13 @@
   }
 
   .card-list__wrapper {
-    justify-content: space-around;
+    /* justify-content: space-around; */
     gap: 34px;
+  }
+}
+
+@media screen and (max-width: 731px) {
+  .card-list__wrapper {
+    justify-content: space-around;
   }
 }

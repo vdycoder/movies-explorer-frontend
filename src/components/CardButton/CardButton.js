@@ -7,13 +7,6 @@ function CardButton({
   onMovieSave,
   onMovieDelete
 }) {
-  // const [ isSaved, setIsSaved ] = useState(props.isSaved);
-  // const savedOnly = props.savedOnly;
-  // const handleLikeClick = () => {
-  //   setIsSaved(!isSaved)
-  // }
-  // const handleDeleteClick = () => {
-  // }
   const location = useLocation();
 
   return (

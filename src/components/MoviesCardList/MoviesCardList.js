@@ -23,8 +23,8 @@ function MoviesCardList({
       )}
       <ul className='card-list__wrapper'>
         {!isMoviesNotFound && (
-          movies.map((movie, i) => (
-            <li key={i} className='card-list__item'>
+          movies.map((movie) => (
+            <li key={movie.id || movie._id} className='card-list__item'>
               <MoviesCard
                 movie={movie}
                 isLiked={checkLikeStatus(savedMovies, movie)}

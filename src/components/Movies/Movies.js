@@ -8,13 +8,16 @@ import MoviesMoreBtn from '../MoviesMoreBtn/MoviesMoreBtn';
 
 import beatfilmMoviesApi from '../../utils/MoviesApi';
 import {
+  WINDOW_SIZE_XL,
+  WINDOW_SIZE_L,
   WINDOW_SIZE_M,
-  WINDOW_SIZE_S,
+  NUMBER_OF_CARDS_XL,
   NUMBER_OF_CARDS_L,
   NUMBER_OF_CARDS_M,
   NUMBER_OF_CARDS_S,
-  MORE_CARDS_S,
-  MORE_CARDS_XS
+  MORE_CARDS_L,
+  MORE_CARDS_M,
+  MORE_CARDS_S
 } from '../../utils/constants';
 import { filterMovies } from '../../utils/utils';
 
@@ -23,8 +26,6 @@ function Movies({
   onMovieSave,
   onMovieDelete,
 }) {
-  const savedAllMovies =
-    JSON.parse(localStorage.getItem('allMovies'));
   const savedFoundMovies =
     JSON.parse(localStorage.getItem('foundMovies'));
   const savedSearchName =
@@ -32,7 +33,7 @@ function Movies({
   const savedStateCheckbox =
     JSON.parse(localStorage.getItem('stateCheckbox')) ?? false;
 
-  const [allMovies, setAllMovies] = useState(savedAllMovies);
+  const [allMovies, setAllMovies] = useState(null);
   const [renderMovies, setRenderMovies] = useState([]);
 
   const [searchName, setSearchName] = useState(savedSearchName);
@@ -49,9 +50,25 @@ function Movies({
   const [renderCards, setRenderCards] = useState(null);
 
   // Обработка чекбокса короткометражек
-  function handleToggleCheckbox() {
-    setIsShortFilms(!isShortFilms);
-  };
+  const handleToggleCheckbox = useCallback(
+    (isChecked) => {
+      setIsShortFilms(isChecked);
+      if (searchName) {
+        const filter = filterMovies(
+          allMovies !== null ? allMovies : foundMovies,
+          searchName,
+          isChecked
+        );
+        setFoundMovies(filter)
+        if (filter.length !== 0) {
+          setIsMoviesNotFound(false);
+        } else {
+          setIsMoviesNotFound(true);
+        }
+      } else {
+        setSearchError('Нужно ввести название для поиска');
+      }
+    }, [allMovies, foundMovies, searchName]);
 
   // Колбэк отображения дополнительных карточек
   const handleMoreCards = useCallback(
@@ -66,54 +83,62 @@ function Movies({
   };
 
   // Обработка отправки формы поиска
-  function handleSearch(e) {
-    e.preventDefault();
-    if (searchName === '') {
+  function handleSearch(text) {
+    //e.preventDefault();
+    setSearchName(text);
+    if (text === '') {
       setSearchError('Нужно ввести название для поиска');
     } else {
       setSearchError('');
-      const filter = filterMovies(allMovies, searchName, isShortFilms)
-      setFoundMovies(filter);
-      if (filter.length !== 0) {
-        setIsMoviesNotFound(false);
+      if (allMovies === null) {
+        setIsLoading(true);
+        beatfilmMoviesApi.getAllMovies()
+          .then((movies) => {
+            //localStorage.setItem('allMovies', JSON.stringify(movies));
+            setAllMovies(movies);
+            const filter = filterMovies(movies, text, isShortFilms)
+            setFoundMovies(filter);
+            if (filter.length !== 0) {
+              setIsMoviesNotFound(false);
+            } else {
+              setIsMoviesNotFound(true);
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+            setIsServerError(true);
+          })
+          .finally(() => {
+            setIsLoading(false);
+          })
       } else {
-        setIsMoviesNotFound(true);
+        const filter = filterMovies(allMovies, text, isShortFilms)
+        setFoundMovies(filter);
+        if (filter.length !== 0) {
+          setIsMoviesNotFound(false);
+        } else {
+          setIsMoviesNotFound(true);
+        }
       }
     }
   };
 
   // Определяю количество карточек на странице в зависимости от ширины экрана
   useEffect(() => {
-    if (windowSize >= WINDOW_SIZE_M) {
+    if (windowSize >= WINDOW_SIZE_XL) {
+      setRenderCards(NUMBER_OF_CARDS_XL);
+      setMoreCards(MORE_CARDS_L);
+    } else if (windowSize < WINDOW_SIZE_XL && windowSize > WINDOW_SIZE_L) {
       setRenderCards(NUMBER_OF_CARDS_L);
-      setMoreCards(MORE_CARDS_S);
-    } else if (windowSize < WINDOW_SIZE_M && windowSize > WINDOW_SIZE_S) {
+      setMoreCards(MORE_CARDS_M);
+    } else if (windowSize < WINDOW_SIZE_L && windowSize > WINDOW_SIZE_M) {
       setRenderCards(NUMBER_OF_CARDS_M);
-      setMoreCards(MORE_CARDS_XS);
-    } else if (windowSize <= WINDOW_SIZE_S) {
+      setMoreCards(MORE_CARDS_S);
+    } else if (windowSize <= WINDOW_SIZE_M) {
       setRenderCards(NUMBER_OF_CARDS_S);
-      setMoreCards(MORE_CARDS_XS);
+      setMoreCards(MORE_CARDS_S);
     }
-  }, [windowSize]);
-
-  // Загружаю фильмы из апи, если пусто в LocalStorage:
-  useEffect(() => {
-    if (!allMovies) {
-      setIsLoading(true);
-      beatfilmMoviesApi.getAllMovies()
-        .then((movies) => {
-          localStorage.setItem('allMovies', JSON.stringify(movies));
-          setAllMovies(movies);
-        })
-        .catch((err) => {
-          console.error(err);
-          setIsServerError(true);
-        })
-        .finally(() => {
-          setIsLoading(false);
-        })
-    }
-  }, [allMovies]);
+  }, [windowSize, foundMovies]);
 
   // Устанавливаю список карточек к показу на странице
   useEffect(() => {
@@ -122,18 +147,12 @@ function Movies({
     }
   }, [renderCards, foundMovies]);
 
-  // Если в поиске пустое значение - показываем все фильмы как найденные
-  useEffect(() => {
-    if (!searchName) {
-      setFoundMovies(allMovies);
-    }
-  }, [allMovies, searchName]);
-
   // Сохраняю данные запроса, чекбокса, показываемых фильмов в LocalStorage
   useEffect(() => {
-    if (foundMovies !== null) {
-      localStorage.setItem('foundMovies', JSON.stringify(foundMovies));
-    }
+    // if (foundMovies !== null) {
+    //   localStorage.setItem('foundMovies', JSON.stringify(foundMovies));
+    // }
+    localStorage.setItem('foundMovies', JSON.stringify(foundMovies));
     localStorage.setItem('searchName', searchName);
     localStorage.setItem('stateCheckbox', JSON.stringify(isShortFilms));
   }, [searchName, isShortFilms, foundMovies]);
@@ -150,7 +169,6 @@ function Movies({
     <main className='movies'>
       <SearchForm
         searchName={searchName}
-        setSearchName={setSearchName}
         searchError={searchError}
         isShortFilms={isShortFilms}
         handleToggleCheckbox={handleToggleCheckbox}

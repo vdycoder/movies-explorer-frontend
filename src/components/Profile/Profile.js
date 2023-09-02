@@ -1,16 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import './Profile.css';
 import useValidation from '../../hooks/useValidation';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function Profile({
-  currentUser,
   onUserUpdate,
   onLogout,
   isLoading,
   serverError,
   setServerError,
 }) {
+  const currentUser = useContext(CurrentUserContext);
   const [isEditMode, setIsEditMode] = useState(false);
   const [isUserUpdated, setIsUserUpdated] = useState(false);
   const {
@@ -42,18 +43,20 @@ function Profile({
       currentUser.name !== values.name || currentUser.email !== values.email
         ? setIsUserUpdated(true)
         : setIsUserUpdated(false);
-    }, [currentUser, values]
-  );
+    }, [currentUser, values]);
 
   useEffect(() => {
-      resetValidation();
-    }, [resetValidation]
-  );
+      resetValidation({
+        name: currentUser.name,
+        email: currentUser.email },
+        {},
+        true
+      );
+    }, [resetValidation, currentUser]);
 
   useEffect(() => {
       setServerError('');
-    }, [values, setServerError]
-  );
+    }, [values, setServerError]);
 
 
   return (
@@ -75,7 +78,7 @@ function Profile({
                 name='name'
                 type='text'
                 className='profile__input'
-                value={values.name || currentUser.name}
+                value={values.name || ''}
                 onChange={handleChange}
                 disabled={isEditMode ? '': 'disabled'}
                 required
@@ -92,7 +95,7 @@ function Profile({
                 name='email'
                 type='email'
                 className='profile__input'
-                value={values.email || currentUser.email}
+                value={values.email || ''}
                 onChange={handleChange}
                 disabled={isEditMode ? '': 'disabled'}
                 required

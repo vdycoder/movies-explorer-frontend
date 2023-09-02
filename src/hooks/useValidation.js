@@ -24,12 +24,12 @@ function useValidation() {
     setIsValid(e.target.closest('form').checkValidity());
   };
 
-  const resetValidation = useCallback(() => {
-      setValues({});
-      setErrors({});
-      setIsValid(false);
-    }, [setValues, setErrors, setIsValid]
-  );
+  const resetValidation = useCallback(
+    (newValues = {}, newErrors = {}, newIsValid = false) => {
+      setValues(newValues);
+      setErrors(newErrors);
+      setIsValid(newIsValid);
+    }, [setValues, setErrors, setIsValid]);
 
   return { values, errors, isValid, handleChange, resetValidation };
 }

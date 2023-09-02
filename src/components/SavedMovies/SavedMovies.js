@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
@@ -6,51 +6,59 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import { filterMovies } from '../../utils/utils';
 
 function SavedMovies({savedMovies, onMovieDelete}) {
-  const savedSearchName =
-    localStorage.getItem('searchSavedName') ?? '';
-  const savedStateCheckbox =
-    JSON.parse(localStorage.getItem('stateSavedCheckbox')) ?? false;
-
   const [foundMovies, setFoundMovies] = useState([]);
-  const [renderMovies, setRenderMovies] = useState(foundMovies ?? []);
-  const [searchName, setSearchName] = useState(savedSearchName);
-
-  const [isShortFilms, setIsShortFilms] = useState(savedStateCheckbox);
+  const [renderMovies, setRenderMovies] = useState(savedMovies);
+  const [searchName, setSearchName] = useState('');
+  const [isShortFilms, setIsShortFilms] = useState(false);
   const [isMoviesNotFound, setIsMoviesNotFound] = useState(false);
   const [searchError, setSearchError] = useState('');
 
   // Обработка чекбокса короткометражек
-  function handleToggleCheckbox() {
-    setIsShortFilms(!isShortFilms);
-  };
-
-  // Обработка отправки формы поиска
-  function handleSearch(e) {
-    e.preventDefault();
-    if (searchName === '') {
-      setSearchError('Нужно ввести название для поиска');
-    } else {
-      setSearchError('');
-      const filter = filterMovies(savedMovies, searchName, isShortFilms)
-      setFoundMovies(filter);
+  const handleToggleCheckbox = useCallback(
+    (isChecked) => {
+      setIsShortFilms(isChecked);
+      const filter = filterMovies(
+        savedMovies,
+        searchName,
+        isChecked
+      );
+      setFoundMovies(filter)
       if (filter.length !== 0) {
         setIsMoviesNotFound(false);
       } else {
         setIsMoviesNotFound(true);
       }
+    }, [savedMovies, searchName]);
+
+  // Обработка отправки формы поиска
+  function handleSearch(text) {
+    setSearchName(text);
+    if (text === '') {
+      setSearchError('Нужно ввести название для поиска');
+    } else {
+      setSearchError('');
+    }
+    const filter = filterMovies(savedMovies, text, isShortFilms)
+    setFoundMovies(filter);
+    if (filter.length !== 0) {
+      setIsMoviesNotFound(false);
+    } else {
+      setIsMoviesNotFound(true);
     }
   };
 
-  // Сохраняем данные запроса, чекбокса, показываемых фильмов в LocalStorage
-  useEffect(() => {
-    localStorage.setItem('searchSavedName', searchName);
-    localStorage.setItem('stateSavedCheckbox', JSON.stringify(isShortFilms));
-  }, [isShortFilms, foundMovies, searchName]);
-
   // Обновляем отображаемые карточки при изменении сохраненых фильмов
   useEffect(() => {
-    setFoundMovies(savedMovies);
-  }, [savedMovies]);
+    const filter = filterMovies(savedMovies, searchName, isShortFilms)
+    setFoundMovies(filter);
+    if (filter.length !== 0) {
+      setIsMoviesNotFound(false);
+    } else {
+      setIsMoviesNotFound(true);
+    }
+
+  }, [savedMovies, searchName, isShortFilms]);
+
 
   // Обновляем отображаемые карточки при изменении найденных фильмов
   useEffect(() => {
@@ -63,7 +71,6 @@ function SavedMovies({savedMovies, onMovieDelete}) {
     <main className='movies-saved'>
       <SearchForm
         searchName={searchName}
-        setSearchName={setSearchName}
         searchError={searchError}
         isShortFilms={isShortFilms}
         handleToggleCheckbox={handleToggleCheckbox}

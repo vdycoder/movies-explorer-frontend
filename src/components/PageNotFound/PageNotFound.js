@@ -1,9 +1,11 @@
-import React from 'react';
-
 import './PageNotFound.css';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function PageNotFound(props) {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(-1);
+  };
   return (
     <main className='error-page'>
       <div className='error-page__container'>
@@ -12,10 +14,7 @@ function PageNotFound(props) {
           <p className='error-page__subtitle'>Страница не найдена</p>
         </div>
         <span className='auth__actions_link-container'>
-          <Link
-            to={-1}
-            className='link auth__link'
-          >Назад</Link>
+          <button className='btn auth__link error-page__btn' onClick={handleClick}>Назад</button>
         </span>
       </div>
     </main>
