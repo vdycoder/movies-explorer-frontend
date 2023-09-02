@@ -8,4 +8,4 @@
 [Ссылка на пулл реквест](https://github.com/vdycoder/movies-explorer-frontend/pull/5)
 
 ## Ссылка на задеплоенный проект
-[Ссылка на пулл реквест](https://movies.vdycoder.nomoredomains.xyz)
+[Ссылка на задеплоенный проект](https://movies.vdycoder.nomoredomains.xyz)
