@@ -35,7 +35,6 @@ function App() {
       mainApi.getUserInfo({ token })
         .then(res => {
           if (res) {
-            console.log(res);
             setIsLoggedIn(true);
             setCurrentUser(res);
           }
