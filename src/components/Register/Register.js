@@ -1,36 +1,46 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useCallback, useEffect } from 'react';
+import { Link, Navigate } from 'react-router-dom';
 
 import './Register.css';
 import logo from '../../images/logo.svg';
 import ActionBtn from '../ActionBtn/ActionBtn';
 import AuthForm from '../AuthForm/AuthForm';
+import useValidation from '../../hooks/useValidation';
 
-function Register(props) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
-  const navigate = useNavigate();
+function Register({
+  onRegister,
+  loggedIn,
+  isLoading,
+  serverError,
+  setServerError
+}) {
+  const {
+    values,
+    errors,
+    isValid,
+    handleChange,
+    resetValidation
+  } = useValidation();
 
-  function handleEmailChange(e) {
-    setEmail(e.target.value);
-  }
+  const handleSubmit = useCallback((e) => {
+      e.preventDefault();
+      onRegister(values);
+    }, [values, onRegister]
+  );
 
-  function handlePasswordChange(e) {
-    setPassword(e.target.value);
-  }
+  useEffect(() => {
+      resetValidation();
+    }, [resetValidation]
+  );
 
-  function handleNameChange(e) {
-    setName(e.target.value);
-  }
+  useEffect(() => {
+      setServerError('');
+    }, [values, setServerError]
+  );
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    //onRegister(email, password);
-    navigate('/movies');
-  }
-
-  return (
+  return loggedIn ? (
+    <Navigate to='/movies' replace />
+  ) : (
     <main className='auth'>
       <div className='auth__header'>
         <Link
@@ -44,7 +54,6 @@ function Register(props) {
       <AuthForm
         id={'register-form'}
         name={'register-form'}
-        onSubmit={handleSubmit}
       >
         <div className='auth__input-container'>
           <label
@@ -54,16 +63,16 @@ function Register(props) {
           <input
             id='name'
             name='name'
-            className='auth__input'
             type='text'
+            className={`auth__input ${
+              errors.name in errors ? 'auth__input_with-error' : ''
+            }`}
             placeholder='Виталий'
-            value={name}
-            onChange={handleNameChange}
+            value={values.name || ''}
+            onChange={handleChange}
             required
           ></input>
-          <span
-            className='form__input-error form__input-error_field_name'
-          ></span>
+          <span className='form__input-error'>{errors.name || ''}</span>
         </div>
         <div className='auth__input-container'>
           <label
@@ -73,16 +82,16 @@ function Register(props) {
           <input
             id='email'
             name='email'
-            className='auth__input'
             type='email'
+            className={`auth__input ${
+              errors.email in errors ? 'auth__input_with-error' : ''
+            }`}
             placeholder='pochta@yandex.ru'
-            value={email}
-            onChange={handleEmailChange}
+            value={values.email || ''}
+            onChange={handleChange}
             required
           ></input>
-          <span
-            className='form__input-error form__input-error_field_email'
-          ></span>
+          <span className='form__input-error'>{errors.email || ''}</span>
         </div>
         <div className='auth__input-container'>
           <label
@@ -92,21 +101,26 @@ function Register(props) {
           <input
             id='password'
             name='password'
-            className='auth__input auth__input_with-error'
             type='password'
-            value={password || '••••••••••••••'}
-            onChange={handlePasswordChange}
+            className={`auth__input ${
+              errors.password in errors ? 'auth__input_with-error' : ''
+            }`}
+            value={values.password || ''}
+            onChange={handleChange}
             required
           ></input>
-          <span
-            className='form__input-error form__input-error_field_password'
-          >Что-то пошло не так...</span>
+          <span className='form__input-error'>{errors.password || ''}</span>
         </div>
       </AuthForm>
       <nav className='auth__actions'>
+        <span
+          className={`auth__server-error ${
+            isValid || isLoading ? '' : 'auth__server-error__active'
+          }`}
+        >{serverError}</span>
         <ActionBtn
-          caption={'Зарегистрироваться'}
-          isDisabled={false}
+          caption={isLoading ? 'Регистрация...' : 'Зарегистрироваться'}
+          isDisabled={!isValid || isLoading}
           onClick={handleSubmit}
           form='register-form'
         />

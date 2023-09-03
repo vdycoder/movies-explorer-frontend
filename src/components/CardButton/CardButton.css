@@ -24,3 +24,10 @@
 .movie-card__btn-delete:hover {
   background-image: url('../../images/icon__dislike.svg');
 }
+
+@media screen and (max-width: 767px) {
+  .movie-card__btn-delete {
+    opacity: 1;
+    background-image: url('../../images/icon__dislike.svg');
+  }
+}

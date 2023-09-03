@@ -30,6 +30,11 @@
   font-weight: 400;
 }
 
+.error-page__btn {
+  border: none;
+  background-color: inherit;
+}
+
 
 @media screen and (max-width: 1139px) {
   .error-page__container {

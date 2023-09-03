@@ -4,6 +4,7 @@
   margin: 0 auto;
   display: flex;
   justify-content: center;
+  min-height: 166px;
 }
 
 .more__btn {
@@ -23,7 +24,7 @@
 }
 
 .more__btn_hidden {
-  padding: 0;
+  display: none;
 }
 
 @media screen and (max-width: 767px) {
